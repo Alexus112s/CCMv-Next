@@ -1,0 +1,26 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title>{{action}}</h1>
+<div mat-dialog-content>
+  <div *ngIf="action != 'Delete'; else elseTemplate">
+    <mat-form-field>
+      <input placeholder="{{action}} clientId" matInput [(ngModel)]="local_data.clientId">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{action}} date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="local_data.date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="{{action}} IP" matInput [(ngModel)]="local_data.ip">
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="local_data.isAccepted">is Accepted</mat-checkbox>
+  </div>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.id}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
